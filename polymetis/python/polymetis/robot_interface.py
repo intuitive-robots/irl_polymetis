@@ -174,6 +174,10 @@ class BaseRobotInterface:
         """Returns the latest RobotState."""
         return self.grpc_connection.GetRobotState(EMPTY)
 
+    def get_robot_state_stream(self) -> Generator[RobotState, None, None]:
+        """Returns a stream of RobotStates."""
+        return self.grpc_connection.GetRobotStateStream(EMPTY)
+
     def get_previous_interval(self, timeout: float = None) -> LogInterval:
         """Get the log indices associated with the currently running policy."""
         log_interval = self.grpc_connection.GetEpisodeInterval(EMPTY)
