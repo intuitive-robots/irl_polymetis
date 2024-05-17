@@ -1,6 +1,6 @@
 defaults:
-  - gripper: robotiq_2f
+  - gripper: franka_hand
 
-ip: 0.0.0.0
+ip: 10.10.10.210
 port: 50052
 timeout: 15
