@@ -9,9 +9,21 @@ if [[ $? -ne 4 ]]; then
     exit 1
 fi
 
+usage="
+Usage:            $(basename $0) {ROBOT_ID} [-h] [-i IP] [-p PORT] [-c CONDA_ENV] [-r]
+
+Options:
+  ROBOT_ID        The robots id (eg. 101).
+  -h, --help      Display this help message.
+  -i, --pc-ip     Change the ip address, where the server is running. Default is localhost.
+  -p, --port      Change the port of the server. Default is 50051.
+  -c, --conda     Change the conda environment, where polymetis is installed. Default is poly.
+  -r, --readonly  Starts the server in readonly mode. For usage with the robots white mode.
+"
+
 # option --output/-o requires 1 argument
-LONGOPTS=pc-ip:,port:,readonly,conda:
-OPTIONS=i:p:rc:
+LONGOPTS=help,pc-ip:,port:,readonly,conda:
+OPTIONS=hi:p:rc:
 
 # -temporarily store output to be able to check for errors
 # -activate quoting/enhanced mode (e.g. by writing out “--options”)
@@ -28,6 +40,10 @@ conda_env="poly"
 # now enjoy the options in order and nicely split until we see --
 while true; do
     case "$1" in
+        -h|--help)
+            echo "$usage"
+            exit 0
+            ;;
         -i|--pc-ip)
             pc_ip="$2"
             shift 2

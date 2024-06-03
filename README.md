@@ -85,6 +85,7 @@ Additional arguments for the commands can be seen in the table below.
 
 Argument                | Description
 ----------------------- | -----------
+-h, --help              | Display a help message.
 -i, --pc-ip [IP]        | Change the ip address, where the server is running. Default is *localhost*.
 -p, --port [PORT]       | Change the port of the server. Default is *50051*.
 -c, --conda [CONDA_ENV] | Change the conda environment, where polymetis is installed. Default is *poly*.
