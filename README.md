@@ -32,15 +32,6 @@ cd ../..
 pip install -e ./polymetis
 ```
 
-To launch the robot server
-```
-# robot
-cd launcher; conda activate robo; ./launch_robot.sh
-
-# gripper
-cd launcher; conda activate robo; ./launch_gripper.sh
-```
-
 ### On Workstation
 
 1) Create a **gpu** environment with dependencies.
@@ -76,6 +67,29 @@ conda install mkl==2024.0.0
 CUDACXX=/usr/local/cuda-12.4/bin/nvcc /usr/bin/cmake .. -DCMAKE_BUILD_TYPE=Release
 ```
 
+## Launch Polymetis (IRL)
+
+To launch the robot or gripper server:
+
+```bash
+# start robot server
+./scripts/start_robot.sh 101
+
+# start gripper server
+./scripts/start_gripper.sh 201
+```
+
+You need to specify the robots id. It is the same as the last part if the robots ip address (10.10.10.**101**).
+
+Additional arguments for the commands can be seen in the table below.
+
+Argument                | Description
+----------------------- | -----------
+-h, --help              | Display a help message.
+-i, --pc-ip [IP]        | Change the ip address, where the server is running. Default is *localhost*.
+-p, --port [PORT]       | Change the port of the server. Default is *50051*.
+-c, --conda [CONDA_ENV] | Change the conda environment, where polymetis is installed. Default is *poly*.
+-r, --readonly          | Starts the server in readonly mode. For usage with the robots white mode. Only for the robot server.
 
 ---
 

@@ -5,20 +5,20 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
+import logging
 import os
 import time
-import logging
 
 import hydra
 
 from polymetis.robot_servers import GripperServerLauncher
-from polymetis.utils.grpc_utils import check_server_exists
 from polymetis.utils.data_dir import BUILD_DIR
+from polymetis.utils.grpc_utils import check_server_exists
 
 log = logging.getLogger(__name__)
 
 
-@hydra.main(config_name="launch_gripper")
+@hydra.main(config_path="../../conf", config_name="launch_gripper")
 def main(cfg):
     log.info(f"Adding {BUILD_DIR} to $PATH")
     os.environ["PATH"] = BUILD_DIR + os.pathsep + os.environ["PATH"]
