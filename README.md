@@ -16,9 +16,12 @@ It is further developed by the Intuitive-Learning-Robots Lab to enhance their Ro
 ```bash
 # clone & create env
 git clone git@github.com:intuitive-robots/irl_polymetis.git
-cd monometis/
+cd irl_polymetis/
+
+# change name of environment to whatever you desire in polymetis/environment_cpu.yaml
+
 mamba env create -f polymetis/environment_cpu.yml
-conda activate robo
+conda activate <env_name>
 
 # compile stuff
 ./scripts/build_libfranka.sh
@@ -46,9 +49,12 @@ and `pytorch-cuda=11.8`.
 ```bash
 # clone & create *gpu* env
 git clone git@github.com:intuitive-robots/irl_polymetis.git
-cd monometis/
+cd irl_polymetis/
+
+# change name of environment to whatever you desire in polymetis/environment.yaml
+
 mamba env create -f polymetis/environment.yml
-conda activate robo
+conda activate <env_name>
 
 # compile stuff, no need to build libfranka on this machine
 mkdir -p ./polymetis/build
@@ -61,11 +67,12 @@ cd ../..
 pip install -e ./polymetis
 ```
 
-for irl users, try this cmake + downgrade mkl
+for irl users, try this cmake + downgrade mkl:
 ```
 conda install mkl==2024.0.0
 CUDACXX=/usr/local/cuda-12.4/bin/nvcc /usr/bin/cmake .. -DCMAKE_BUILD_TYPE=Release
 ```
+Make sure that the cuda version in the command above is aligned with what you see on `nvidia-smi`!
 
 ## Launch Polymetis (IRL)
 
