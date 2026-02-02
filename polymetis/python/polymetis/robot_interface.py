@@ -424,6 +424,9 @@ class RobotInterface(BaseRobotInterface):
 
     def get_joint_positions(self) -> torch.Tensor:
         return torch.Tensor(self.get_robot_state().joint_positions)
+    
+    def get_wrench(self) -> torch.Tensor:
+        return torch.Tensor(self.get_robot_state().ext_wrench_base)
 
     def get_joint_velocities(self) -> torch.Tensor:
         return torch.Tensor(self.get_robot_state().joint_velocities)

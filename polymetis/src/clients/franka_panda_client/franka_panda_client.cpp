@@ -78,6 +78,11 @@ FrankaTorqueControlClient::FrankaTorqueControlClient(
     robot_state_.add_motor_torques_desired(0.0);
   }
 
+  // Outside of the loop because wrench has 6 elements
+  for (int i = 0; i < 6; i++) {                                                                                          
+    robot_state_.add_ext_wrench_base(0.0);                                                                               
+  }  
+
   // Parse yaml
   limit_rate_ = config["limit_rate"].as<bool>();
   lpf_cutoff_freq_ = config["lpf_cutoff_frequency"].as<double>();
@@ -232,6 +237,8 @@ void FrankaTorqueControlClient::updateServerCommand(
       robot_state_.set_motor_torques_external(
           i, libfranka_robot_state.tau_ext_hat_filtered[i]);
 
+      
+
       // Check if previous command is successful by checking whether
       // constant torque policy for packet drops is applied
       // (If applied, desired torques will be exactly the same as last timestep)
@@ -243,6 +250,10 @@ void FrankaTorqueControlClient::updateServerCommand(
       robot_state_.set_motor_torques_desired(i,
                                              libfranka_robot_state.tau_J_d[i]);
     }
+
+    for (int i = 0; i < 6; i++) {                                                                                          
+      robot_state_.set_ext_wrench_base(i, libfranka_robot_state.O_F_ext_hat_K[i]);                                         
+    }   
 
     robot_state_.set_prev_command_successful(prev_command_successful);
 

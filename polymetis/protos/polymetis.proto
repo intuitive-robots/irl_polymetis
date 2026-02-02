@@ -133,6 +133,7 @@ message RobotState {
   float prev_controller_latency_ms = 10;                  //Latency of previous ControlUpdate call
   bool prev_command_successful = 11;                      //Whether previous command packet is successfully transmitted
   int32 error_code = 12;
+  repeated float ext_wrench_base = 13;
 }
 
 message TorqueCommand {
